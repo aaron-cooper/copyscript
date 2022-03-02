@@ -1,4 +1,5 @@
 import subprocess
+import multiprocessing
 
 infile = open("paths.txt", "r")
 lists = infile.readlines()
@@ -15,7 +16,7 @@ argsList = []
 
 i = 2
 while i < len(lists):
-    args = ["robocopy", "/E"]
+    args = ["robocopy", "/E", f"/MT:{multiprocessing.cpu_count()}"]
     args.append(srcRoot + lists[i])
     args.append(destRoot + lists[i])
     j = i
